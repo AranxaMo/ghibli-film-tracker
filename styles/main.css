@@ -1,0 +1,146 @@
+:root{
+    --pink: #FBA89D;
+    --lightColor: #FCFAF9;
+    --darkColor: #2C2726;
+    --cream: #ede4d3;
+    --lightCream: #fff6e5;
+    --green: #b2caa9;
+    --blue: #339eb8;
+    --yellow: #eac562;
+}
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;  /* 1rem = 10px*/
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+h1, h2, h3, h4,p{
+    line-height: 1.2;
+    margin: 0;
+}
+.fa-solid{
+    font-size: 2.5rem;
+}
+h1{
+    font-size: 3rem;
+}
+h2{
+    font-size: 2.5rem;
+}
+h3{
+    font-size: 2rem;
+}
+p, li{
+    font-size: 1.5rem;
+}
+
+/*Nav*/
+.navbar{
+    height: 8rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: red;
+}
+.navbar-content{
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+}
+.navbar-content.shown{
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+.search-bar{
+    width: 60%;
+    height: 2.5rem;
+    font-size: 1.8rem;
+}
+.fa-filter{
+    display: none;
+}
+/*hero
+.header{
+    width: 100%;
+    height: 50vh;
+    background-color: lightpink;
+    /* background: radial-gradient(circle, rgba(255,255,255,0.2665441176470589) 0%, rgba(255,255,255,0.5970763305322129) 50%, rgba(255,255,255,1) 100%), url("../Design/img/banner.jpg") no-repeat center; */
+   /* background-size: cover; 
+    position: relative;
+} 
+
+.hero-title{
+    position: absolute;
+    bottom: 2rem;
+    left: 3rem;
+    width: 50%;
+} 
+
+/*Main*/
+.main{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 5rem 0;
+}
+.movie-container{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    width: 90%;
+    border: 1px solid blue;
+    height: auto;
+    margin-bottom: 2rem;
+}
+.img-container{
+    width: 100%;
+}
+.info-container{
+    width: 100%;
+    padding: 1rem;
+}
+.banner-img{
+    width: 100%;
+    object-fit: contain;
+}
+
+
+/*FOOTER*/
+.footer{
+    padding: 3rem 0 0;
+    text-align: center;
+}
+
+
+
+
+/*MOVIE DETAILS*/
+.video-movie{
+    background-color: lightblue;
+    width: 100%;
+    height: 40vh;
+    position: relative;
+}
+.movie-cover{
+    position: relative;
+    width: 100%;
+    height: 13rem;
+}
+.movie-info{
+    text-align: center;
+}
+.movie-info__stars{
+    font-size: 2rem;
+}
+.cover-img{
+    width: 30%;
+    position: absolute;
+    top: -7rem;
+    right: 0;
+    left: 0;
+    margin: auto;
+}

@@ -1,0 +1,140 @@
+:root{
+    --pink: #FBA89D;
+    --lightColor: #FCFAF9;
+    --darkColor: #2C2726;
+    --cream: #ede4d3;
+    --lightCream: #fff6e5;
+    --green: #b2caa9;
+    --blue: #339eb8;
+    --yellow: #eac562;
+}
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;  /* 1rem = 10px*/
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+h2, h3, h4,p{
+    line-height: 1.2;
+    margin: 1rem 0;
+}
+h2{
+    font-size: 2.5rem;
+}
+label, p{
+    font-size: 1.6rem;
+}
+/*header*/
+body{
+    background-color: var(--green);
+}
+.logo-container{
+    width: 80%;
+    height: 30vh;
+    margin: auto;
+}
+.ghibli-logo{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/*main*/
+.login-container, .login-socials{
+    width: 85%;
+    margin: 2rem auto;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+}
+.input-field{
+    width: 100%;
+    height: 2.5rem;
+    border: none;
+    margin: 1rem 0;
+    border-bottom: 1px solid var(--darkColor);
+    background-color: transparent;
+}
+.button{
+    margin-top: 2rem;
+    padding: 1.5rem 4.5rem;
+    border: none;
+    border-radius: 3rem;
+    cursor: pointer;
+}
+.btn-signin{
+    background-color: var(--yellow);
+    color: var(--darkColor);
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.create-account{
+    text-decoration: underline;
+    cursor: pointer;
+}
+/*Login Socials*/
+hr{
+    width: 90%;
+    border: 0.5px solid var(--darkColor);
+}
+.btn{
+    width: 100%;
+    height: 5.5rem;
+}
+.btn-twitter{
+    background-color: #1d9bf0;
+    color: var(--lightColor);
+}
+
+/* #logout{
+    display: none;
+} */
+/*Sign Up*/
+.signup-background{
+    width: 100vw;
+    height: 111vh;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+}
+.signup-container{
+    background-color: var(--lightColor);
+    border-radius: 1rem;
+    position: absolute;
+    width: 90%;
+    top: 0%;
+    left: 5%;
+    padding: 2rem;
+    transition: transform 1s;
+    transform: translateY(60%);
+}
+.close{
+    font-size: 2.5rem;
+    position: absolute;
+    right: 2rem;
+}
+.signup-form{
+    display: flex;
+    flex-direction: column;
+    font-size: 1.6rem;
+    margin-top: 2rem;
+}
+.btn-signup{
+    background-color: var(--yellow);
+    margin-bottom: 1rem;
+}
+.hidden{
+    transform: translateY(-200%);
+}
+.shown{
+    display: block;
+}
+.btn-logout{
+    display: none;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Ghibli Films Tracker | Login</title>
+    <link rel="stylesheet" href="./styles/normalize.css">
+    <link rel="stylesheet" href="./styles/login.css">
+    <script src="https://kit.fontawesome.com/ce00375316.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="./Design/img/studio-ghibli-logo.svg" alt="Studi Ghibli Logo" class="ghibli-logo">
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="login-container">
+            <h2 class="login-form__title">Login</h2>
+            <form class="login-form">
+                <!-- <label for="email">Email:</label> -->
+                <input type="email" class="input-field" placeholder="Email" id="email">
+    
+                <!-- <label for="password">Password:</label> -->
+                <input type="text" class="input-field" placeholder="Password" id="password">
+    
+                <button type="button" id="btnlogin" class="button btn-signin">Sign In</button>
+                <button type="button" id="logout" class="button btn-logout">Logout</button>
+                <p>Or <strong class="create-account">create an account</strong></p>
+            </form>
+        </section>
+
+        <div class="signup-background hidden">
+            <div class="signup-container hidden">
+                <i class="fa-solid fa-xmark close"></i>
+                <form class="signup-form">
+                    <h2>Register</h2>
+                    <label for="signup-email">Email:</label>
+                    <input type="email" class="input-field" placeholder="Ej. Juan@mail.com" id="signup-email" required>
+        
+                    <label for="password-user">Password:</label>
+                    <input type="password" class="input-field" placeholder="Password" id="password-user" required>
+        
+                    <button type="submit" id="signup" class="button btn-signup">Sign Up</button>
+                </form>
+            </div>
+        </div>
+
+        <hr>
+        <section class="login-socials">
+            <a href=""></a>
+            <button type="button" id="google-login" class="button btn btn-google">Connect with Google</button>
+            <button type="button" id="twitter-login" class="button btn btn-twitter">Connect with Twitter</button>
+        </section>
+    </main>
+
+    <script src="./scripts/firebase.js" type="module"></script>
+</body>
+</html>
