@@ -4,6 +4,9 @@ const movieId = newLink.searchParams.get("movieId");
 
 
 const urlGhibliFilm = `https://ghibliapi.herokuapp.com/films/${movieId}`; 
+const trailers = {
+
+}
 
 function getMovies(url) {
     fetch(url)
@@ -41,16 +44,5 @@ function createDisplay(movie) {
 
     const movieLink = document.querySelector(".movie-link");
     movieLink.href = `https://ghibli.fandom.com/wiki/${movie.title}`;
-    
-    
-
-    // console.log(link);
-
-    // switch (movie.title) {
-    //     case "Castle in the Sky":
-    //         link = "https://ghibli.fandom.com/wiki/Castle_in_the_Sky";
-    //         break;
-    // }
-    // movieLink.href = link;
 }
 

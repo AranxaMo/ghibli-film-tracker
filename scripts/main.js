@@ -7,66 +7,55 @@ hamburguer.addEventListener("click", () => {
     menu.classList.toggle("shown");
 })
 
-function getMovies(url) {
-    fetch(url)
+function getMovies() {
+    fetch(urlGhibli)
     .then(response => response.json())
     .then(data => dataMovie(data))
     
 
     .catch(err => console.log(err));
 }
-getMovies(urlGhibli);
+getMovies();
 
 function dataMovie(data) {
     for (const index of data) {
-        //console.log(index); shows data from movies
         createMovie(index);
+        searchMovie(index)
     }
 }
 
-function createMovie(movie) {
-    const movieContainer = document.createElement('div');
-    movieContainer.classList.add("movie-container");
-    main.appendChild(movieContainer);
-
-    const movieImg = document.createElement('div');
-    const movieInfo = document.createElement('div');
-    movieImg.classList.add("img-container");
-    movieInfo.classList.add("info-container");
-
-    movieContainer.appendChild(movieImg);
-    movieContainer.appendChild(movieInfo);
-    // bannerContainer.classList.add('banner-container');
-
-    const banner = document.createElement('img');
-    banner.src = movie.image;
-    banner.classList.add("banner-img");
-    movieImg.appendChild(banner);
-
-    const title = document.createElement('h2');
-    title.textContent = movie.title;
-
-    const date = document.createElement('p');
-    date.textContent = movie.release_date;
-
-    const duration = document.createElement('p');
-    duration.textContent = `${movie.running_time} min`;
-
-    const rate = document.createElement('p');
-    rate.textContent = `Score: ${movie.rt_score} `; 
-
-
-    movieInfo.appendChild(title);
-    movieInfo.appendChild(date);
-    movieInfo.appendChild(duration);
-    movieInfo.appendChild(rate);
-
-    let id = movie.id;
-    movieContainer.setAttribute('id', id);
-    let red = document.getElementById(id);
-
-    red.addEventListener('click', () => {
-        window.location = "http://127.0.0.1:5500/html/details.html?movieId=" + id;
-    });
+function createMovie(movie) {  
+    const moviesSection = document.querySelector(".movies-section");
+    moviesSection.innerHTML += `
+        <div class="movie-container">
+            <img src="${movie.movie_banner}" class="banner-img"/>
+            <div class="info-container">
+                <h2>${movie.title}</h2>
+                <div class="data-movie_container">
+                    <p>${movie.release_date}</p>
+                    <hr>
+                    <p>${movie.running_time} min</p>
+                    <hr>
+                    <p>Score: ${movie.rt_score}</p>
+                </div>
+                <a href="./details.html?movieId=${movie.id}" class="movie-link__info"></a>
+                <input type="checkbox" class="movie-checkbox" id="${movie.id}">
+                <label for="${movie.id}" class="fa-solid fa-circle-check"></label>
+            </div>
+        </div>
+    `; 
 }
 
+
+function searchMovie(movie){
+    const searchContainer = document.querySelector(".search-Container");
+    let search = document.querySelector(".search-bar");
+    
+    search.addEventListener("input", (e) => {
+       console.log(moviesList);
+    })  
+}
+
+function showResults(movieList){
+    
+}
