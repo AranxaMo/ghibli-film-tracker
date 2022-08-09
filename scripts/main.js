@@ -27,22 +27,22 @@ function getMovies() {
     fetch(urlGhibli)
     .then(response => response.json())
     .then(data => {
-        filters(data);
+        firtLayout(data);
+        dataMovie(data);
         search(data);
     })
     .catch(err => console.log(err));
 }
 getMovies();
 
-// function dataMovie(data) {
-//     let films = [];
-//     for (const index of data) {
-//     }
-//     console.log(films)
-// }
+function firtLayout(data) {
+    for (const index of data) {
+        createMovie(index);
+    }
+}
 
+const moviesSection = document.querySelector(".movies-section");
 function createMovie(movie) {  
-    const moviesSection = document.querySelector(".movies-section");
     moviesSection.innerHTML += `
         <div class="movie-container">
             <img src="${movie.movie_banner}" class="banner-img"/>
@@ -85,54 +85,54 @@ function search(data){
 
 const orderOptions = document.getElementById("order");
 const sortOptions = document.getElementById("options");
-var orderValue = orderOptions.value;
-var sortValue = sortOptions.value;
 
-function filters(data) {
 
-    sortOptions.addEventListener("change", (e =>{
-        sortValue = e.target.value;
-        orderValue = orderOptions.value;
-        console.log(sortValue);
-    }));
-   
-    console.log(sortValue);
-    console.log(orderValue);
 
-    if (sortValue === "duration") {
-        console.log("Si 1")
-        data.sort((a,b) => {
-            if(orderValue === "ascendant") {
-                return a.running_time - b.running_time;
-            }else{
-                return b.running_time - a.running_time;
-            }
-        })
-    }else if (sortValue === "year") {
-        data.sort((a,b) => {
-            if(orderValue === "ascendant"){
-                return a.release_date - b.release_date;
-            }else{
-                return b.release_date - a.release_date;
-            }
-        })
-    }else if (sortValue === "audience score") {
-        data.sort((a,b) =>{
-            if(orderValue === "ascendant"){
-                return a.rt_score - b.rt_score;
-            }else{
-                return b.rt_score - a.rt_score;
-            }
+function dataMovie(data){
+    let orderValue;
+    let sortValue;
+    function filters(sort, order){
+        if(sort === "duration"){
+            data.sort((a,b) => {
+                if(order === "ascendant"){
+                    return a.running_time - b.running_time;
+                }else{
+                    return b.running_time - a.running_time;
+                }
+            })
+        }else if(sort === "year") {
+            data.sort((a,b) =>{
+                if(order === "ascendant"){
+                    return a.release_date - b.release_date;
+                }else{
+                    return b.release_date - a.release_date;
+                }
+            })
+        }else if(sort === "audience") {
+            data.sort((a,b) =>{
+                if(order === "ascendant"){
+                    return a.rt_score - b.rt_score;
+                }else{
+                    return b.rt_score - a.rt_score;
+                }
+            })
+        }
+        moviesSection.innerHTML = "";
+        data.forEach(movie =>{
+            createMovie(movie);
         })
     }
-    data.forEach(movie =>{createMovie(movie)})
+
+    sortOptions.addEventListener("change", (e) =>{
+        orderValue = orderOptions.value;
+        sortValue = e.target.value;
+        filters(sortValue, orderValue);
+    })
+
+    orderOptions.addEventListener("change", (e) =>{
+        orderValue =  e.target.value;
+        sortValue = sortOptions.value;
+        filters(sortValue, orderValue);
+    })
 }
-
-
-
-
-
-
-
-
 
