@@ -6,58 +6,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ghibli Films Tracker | Movie</title>
     <script src="https://kit.fontawesome.com/ce00375316.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../styles/normalize.css">
-    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/details.css">
 </head>
 <body>
     <header class="header-movie">
         <nav class="navbar">
             <a href="./home.html"><i class="fa-solid fa-arrow-left"></i></a>
 
-            <ul class="navbar-content">
-                <li>Home</li>
-                <li>Profile</li>
-            </ul>
-
-            <input class="search-bar" type="text" placeholder="Search movie">
-
-            <div class="search-items">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <i class="fa-solid fa-filter"></i>
-            </div>
         </nav>
         
         <section class="hero-movie">
-            <iframe class="video-movie" width="560" height="315" src="https://www.youtube.com/embed/FWjiXOqRKhk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="video-movie" width="560" height="315" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </section>
     </header>
-
+    
     <main class="main">
-        <div class="movie-cover"></div>
+        <section class="movie-container">
+            <section class="movie-titles">
+                <h1 class="movie-info__title"></h1>
+                <p class="movie-info__titleJ"></p>
+                <div class="movie-data-container">
+                    <p class="movie_info__date"></p>
+                    <hr>
+                    <p class="movie_info__time"></p>
+                    <hr>
+                    <p class="movie_info__rating"></p>
+                </div>
+            </section>
 
-        <section class="movie-info">
-            <h1 class="movie-info__title"></h1>
-            <h2 class="movie-info__titleJ"></h2>
-            <div class="movie-data-container">
-                <p class="movie_info__date"></p>
-                <hr>
-                <p class="movie_info__time"></p>
-                <hr>
-                <p class="movie_info__rating"></p>
+            
+        </section>
+        <section class="movie-info-icons">
+            <div class="movie-info__stars">
+                <input type="radio" name="rate" id="rate-5">
+                <label for="rate-5" class="fa-solid fa-star"></label>
+                <input type="radio" name="rate" id="rate-4">
+                <label for="rate-4" class="fa-solid fa-star"></label>
+                <input type="radio" name="rate" id="rate-3">
+                <label for="rate-3" class="fa-solid fa-star"></label>
+                <input type="radio" name="rate" id="rate-2">
+                <label for="rate-2" class="fa-solid fa-star"></label>
+                <input type="radio" name="rate" id="rate-1">
+                <label for="rate-1" class="fa-solid fa-star"></label>
             </div>
-            <div class="movie-info__stars">&starf;&starf;&starf;&starf;&star;</div>
-
-            <h3 class="movie-synopsis__title">Synopsis</h3>
-            <p class="movie-info__synopsis"></p>
-
-            <input type="checkbox" name="" id="movie__watched" class="movie__watched">
+            <div class="movie-info__check">
+                <input type="checkbox" name="" id="movie__watched" class="movie__watched">
             <label for="movie__watched" class="fa-regular fa-circle-check movie__watched-icon"></label>
+            </div>
+        </section>
+        
+        <section class="movie-info">
+            <h2 class="movie-synopsis__title">Synopsis</h2>
+            <p class="movie-info__synopsis"></p>
             <a href="#" class="movie-link" target="_blank">More info</a>
         </section>
     </main>
 
     <footer class="footer">
-        <p>Made with Love by Aranxa</p>
+        
     </footer>
 
     <script src="../scripts/details.js"></script>

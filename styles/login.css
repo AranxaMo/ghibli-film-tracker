@@ -14,20 +14,24 @@ html {
 }
 *, *:before, *:after {
     box-sizing: inherit;
+    margin: 0;
+    padding: 0;
 }
-h2, h3, h4,p{
+h1,p{
     line-height: 1.2;
     margin: 1rem 0;
 }
-h2{
+h1{
     font-size: 2.5rem;
+    color: var(--lightColor);
 }
 label, p{
     font-size: 1.6rem;
+    color: #DADADB;
 }
 /*header*/
 body{
-    background-color: var(--green);
+    background-color: var(--blue);
 }
 .logo-container{
     width: 80%;
@@ -41,6 +45,11 @@ body{
 }
 
 /*main*/
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .login-container, .login-socials{
     width: 85%;
     margin: 2rem auto;
@@ -53,8 +62,11 @@ body{
     height: 2.5rem;
     border: none;
     margin: 1rem 0;
-    border-bottom: 1px solid var(--darkColor);
+    border-bottom: 1px solid var(--lightColor);
     background-color: transparent;
+}
+.input-field::placeholder{
+    color: var(--lightColor);
 }
 .button{
     margin-top: 2rem;
@@ -81,14 +93,14 @@ body{
 /*Login Socials*/
 hr{
     width: 90%;
-    border: 0.5px solid var(--darkColor);
+    border: 0.5px solid var(--lightCream);
 }
 .btn{
     width: 100%;
     height: 5.5rem;
 }
 .btn-twitter{
-    background-color: #1d9bf0;
+    background-color: #3b5998;
     color: var(--lightColor);
 }
 

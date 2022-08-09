@@ -1,28 +1,45 @@
 const urlGhibli = 'https://ghibliapi.herokuapp.com/films';
-const hamburguer = document.querySelector(".hamburguer");
 const menu = document.querySelector(".navbar-content");
-const main = document.querySelector('.main');
+const searchbar = document.querySelector(".search-bar");
+const searchIcon = document.querySelector(".search-icon");
+const closeIcon = document.querySelector(".close-icon");
+const filterIcon = document.querySelector(".filter-icon");
+const results = document.querySelector(".search-results");
+const filtersContainer = document.querySelector(".filters-options");
 
-hamburguer.addEventListener("click", () => {
-    menu.classList.toggle("shown");
+searchIcon.addEventListener("click", () =>{
+    searchbar.classList.add("open")
+    closeIcon.classList.add("shown");
+    searchIcon.classList.add("shown");
+});
+closeIcon.addEventListener("click", () =>{
+    searchbar.classList.remove("open")
+    closeIcon.classList.remove("shown");
+    searchIcon.classList.remove("shown");
+    searchbar.value = "";
+    results.innerHTML = "";
+});
+filterIcon.addEventListener("click", () =>{
+    filtersContainer.classList.toggle("shown");
 })
 
 function getMovies() {
     fetch(urlGhibli)
     .then(response => response.json())
-    .then(data => dataMovie(data))
-    
-
+    .then(data => {
+        filters(data);
+        search(data);
+    })
     .catch(err => console.log(err));
 }
 getMovies();
 
-function dataMovie(data) {
-    for (const index of data) {
-        createMovie(index);
-        searchMovie(index)
-    }
-}
+// function dataMovie(data) {
+//     let films = [];
+//     for (const index of data) {
+//     }
+//     console.log(films)
+// }
 
 function createMovie(movie) {  
     const moviesSection = document.querySelector(".movies-section");
@@ -46,16 +63,76 @@ function createMovie(movie) {
     `; 
 }
 
-
-function searchMovie(movie){
-    const searchContainer = document.querySelector(".search-Container");
-    let search = document.querySelector(".search-bar");
-    
-    search.addEventListener("input", (e) => {
-       console.log(moviesList);
+function search(data){
+    searchbar.addEventListener("keyup", (e) => {
+        const value = e.target.value.toLowerCase();
+        results.innerHTML = "";
+        data.forEach(movie => {
+            let searchItem = ""
+            searchItem = movie.title.toLowerCase()
+            let movieLink = movie.id;
+            if(searchItem.includes(value)){
+                results.innerHTML += `<a  href="./details.html?movieId=${movieLink}" class="result-item">
+                ${searchItem}
+                </a>`
+            }
+        });
     })  
 }
 
-function showResults(movieList){
-    
+
+
+
+const orderOptions = document.getElementById("order");
+const sortOptions = document.getElementById("options");
+var orderValue = orderOptions.value;
+var sortValue = sortOptions.value;
+
+function filters(data) {
+
+    sortOptions.addEventListener("change", (e =>{
+        sortValue = e.target.value;
+        orderValue = orderOptions.value;
+        console.log(sortValue);
+    }));
+   
+    console.log(sortValue);
+    console.log(orderValue);
+
+    if (sortValue === "duration") {
+        console.log("Si 1")
+        data.sort((a,b) => {
+            if(orderValue === "ascendant") {
+                return a.running_time - b.running_time;
+            }else{
+                return b.running_time - a.running_time;
+            }
+        })
+    }else if (sortValue === "year") {
+        data.sort((a,b) => {
+            if(orderValue === "ascendant"){
+                return a.release_date - b.release_date;
+            }else{
+                return b.release_date - a.release_date;
+            }
+        })
+    }else if (sortValue === "audience score") {
+        data.sort((a,b) =>{
+            if(orderValue === "ascendant"){
+                return a.rt_score - b.rt_score;
+            }else{
+                return b.rt_score - a.rt_score;
+            }
+        })
+    }
+    data.forEach(movie =>{createMovie(movie)})
 }
+
+
+
+
+
+
+
+
+
