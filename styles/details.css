@@ -229,3 +229,16 @@ input[type=checkbox]:checked + label:before{
 .progress-number{
     margin-top: 1rem;
 }
+/*footer*/
+.footer{
+    padding: 1rem 0;
+    text-align: center;
+    background-color: var(--blue);
+    color: var(--lightColor);
+}
+.footer p{
+    color: var(--lightColor);
+}
+.github-link{
+    color: var(--lightColor);
+}

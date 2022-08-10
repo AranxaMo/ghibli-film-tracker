@@ -23,12 +23,12 @@ const signupContainer = document.querySelector(".signup-container");
 const signupBackground = document.querySelector(".signup-background");
 const close = document.querySelector(".close");
 
-signupModal.addEventListener("click", function(){
+signupModal?.addEventListener("click", function(){
   signupContainer.classList.add("shown");
   signupContainer.classList.remove("hidden");
   signupBackground.classList.remove("hidden");
 });
-close.addEventListener("click", function(){
+close?.addEventListener("click", function(){
   signupContainer.classList.add("hidden");
   signupContainer.classList.remove("shown");
   signupBackground.classList.add("hidden");
@@ -38,7 +38,7 @@ close.addEventListener("click", function(){
 onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log("Usuario logueado", user.displayName);
-    window.open("./html/home.html", "_self");
+    //window.open("./html/home.html", "_self");
     const uid = user.uid;
     // ...
   } else {
@@ -47,19 +47,20 @@ onAuthStateChanged(auth, (user) => {
 });
 
 /*Logout*/
-export function logoutAccount() {
-  signOut(auth).then(() => {
-    alert("Sign out succesfully");
-  }).catch((error) => {
-    console.error(error);
-  });
-}
+
+// function logoutAccount() {
+//   signOut(auth).then(() => {
+//     alert("Sign out succesfully");
+//   }).catch((error) => {
+//     console.error(error);
+//   });
+// }
 
 
 /*Sign Up*/
 const btnSignup = document.querySelector("#signup");
 
-btnSignup.addEventListener("click", (e) =>{
+btnSignup?.addEventListener("click", (e) =>{
   e.preventDefault();
   const email = document.querySelector("#signup-email").value;
   const password = document.querySelector("#password-user").value;
@@ -81,7 +82,7 @@ btnSignup.addEventListener("click", (e) =>{
 /*Login with Google*/
 const loginGoogle = document.querySelector("#google-login");
 
-loginGoogle.addEventListener("click", (e) => {
+loginGoogle?.addEventListener("click", (e) => {
   const provider = new GoogleAuthProvider();
   signInWithRedirect(auth, provider);
   getRedirectResult(auth)
@@ -106,7 +107,7 @@ loginGoogle.addEventListener("click", (e) => {
 
 /*Login Email*/
 const btnLogin = document.querySelector("#btnlogin");
-btnLogin.addEventListener("click", (e) => {
+btnLogin?.addEventListener("click", (e) => {
   e.preventDefault();
   const email = document.querySelector("#email").value;
   const password = document.querySelector("#password").value;
@@ -127,7 +128,7 @@ btnLogin.addEventListener("click", (e) => {
 
 /*Login Twitter*/ 
 const loginTwitter = document.querySelector("#twitter-login");
-loginTwitter.addEventListener("click", (e) =>{
+loginTwitter?.addEventListener("click", (e) =>{
   const provider = new TwitterAuthProvider();
   signInWithRedirect(auth, provider);
   getRedirectResult(auth)

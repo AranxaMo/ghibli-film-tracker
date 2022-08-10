@@ -14,24 +14,22 @@ html {
     margin: 0;
     padding: 0;
 }
-h1,p{
+h1{
+    font-size: 3.2rem;
     line-height: 1.2;
     margin: 1rem 0;
     font-family: 'Montserrat', sans-serif;
+    color: var(--lightColor);
 }
-h1{
-    font-size: 2.5rem;
+label, p {
+    font-size: 1.6rem;
     color: var(--lightColor);
     font-family: 'Montserrat', sans-serif;
 }
-h2, label, .button{
-    font-family: 'Montserrat', sans-serif;
+label{
+    font-weight: 600;
 }
-label, p{
-    font-size: 1.6rem;
-    color: var(--darkColor);
-    font-family: 'Montserrat', sans-serif;
-}
+
 /*header*/
 body{
     background-color: var(--blue);
@@ -46,77 +44,47 @@ body{
     height: 100%;
     object-fit: contain;
 }
-
 /*main*/
-.main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.login-container, .login-socials{
+.register-container{
     width: 85%;
     margin: 2rem auto;
     padding: 1rem;
-    border-radius: 0.5rem;
-    font-size: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.register__input{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
 }
 .input-field{
     width: 100%;
     height: 2.5rem;
     border: none;
     margin: 1rem 0;
+    border-radius: 1rem;
     border-bottom: 1px solid var(--lightColor);
     background-color: transparent;
     font-family: 'Montserrat', sans-serif;
-    border-radius: 1rem;
     padding: 0 1rem;
+    font-size: 1.5rem;
     font-weight: 500;
     color: #EEEEEE;
 }
 .input-field::placeholder{
     color: #DADADB;
+    font-size: 1.4rem;
 }
-.button{
+.btn-register{
     margin-top: 2rem;
     padding: 1.5rem 4.5rem;
     border: none;
     border-radius: 3rem;
     cursor: pointer;
+    font-size: 1.6rem;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-}
-.btn-signin{
     background-color: var(--yellow);
     color: var(--darkColor);
-}
-
-.login-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.create-account-link{
-    cursor: pointer;
-    color: var(--lightColor);
-}
-.create-account-link:visited{
-    color: var(--lightColor);
-}
-/*Login Socials*/
-hr{
-    width: 90%;
-    border: 0.5px solid var(--lightColor);
-}
-.btn{
-    width: 100%;
-    height: 5.5rem;
-    font-weight: 600;
-}
-.btn-google{
-    color: #424242;
-}
-.btn-twitter{
-    background-color: #3b5998;
-    color: var(--lightColor);
 }
