@@ -12,7 +12,7 @@
 <body>
     <header class="header">
         <div class="logo-container">
-            <img src="../Design/img/studio-ghibli-logo.svg" alt="Studi Ghibli Logo" class="ghibli-logo">
+            <img src="../assets/img/studio-ghibli-logo.svg" alt="Studi Ghibli Logo" class="ghibli-logo">
         </div>
     </header>
 
@@ -21,12 +21,12 @@
             <h1 class="login-form__title">Login</h1>
             <form class="login-form">
                 <!-- <label for="email">Email:</label> -->
-                <input type="email" class="input-field" placeholder="Email" id="email">
+                <input type="email" class="input-field" placeholder="Email" id="email" required>
     
                 <!-- <label for="password">Password:</label> -->
-                <input type="text" class="input-field" placeholder="Password" id="password">
+                <input type="password" class="input-field" placeholder="Password" id="password" required>
     
-                <button type="button" id="btnlogin" class="button btn-signin">Sign In</button>
+                <button type="submit" id="btnlogin" class="button btn-signin">Sign In</button>
                 <p class="create-account-link">Or <a href="./register.html" class="create-account-link">create an account</strong></a>
             </form>
         </section>
@@ -41,6 +41,6 @@
     <footer>
     </footer>
 
-    <!-- //<script src="./scripts/firebase.js" type="module"></script> -->
+    <script src="../scripts/login.js" type="module"></script>
 </body>
 </html>

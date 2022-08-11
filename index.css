@@ -99,6 +99,8 @@ body{
 }
 hr{
     width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--lightColor);
 }
 .button{
     padding: 1.5rem 3.5rem;

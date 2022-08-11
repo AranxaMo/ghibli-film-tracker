@@ -88,3 +88,12 @@ body{
     background-color: var(--yellow);
     color: var(--darkColor);
 }
+.login-paragraph{
+    width: 85%;
+    margin: 3rem auto;
+    text-align: center;
+}
+.login-paragraph a{
+    color: var(--lightColor);
+    font-weight: 500;
+}

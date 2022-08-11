@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithRedirect, signOut, onAuthStateChanged, signInWithEmailAndPassword, TwitterAuthProvider, getRedirectResult } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithRedirect, signOut, onAuthStateChanged, signInWithEmailAndPassword, TwitterAuthProvider, getRedirectResult, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCjGZEnmf9xKAv0vK73NVwkz5CcULw9f1A",
@@ -17,58 +17,41 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
-/*Modal*/
-const signupModal = document.querySelector(".create-account");
-const signupContainer = document.querySelector(".signup-container");
-const signupBackground = document.querySelector(".signup-background");
-const close = document.querySelector(".close");
-
-signupModal?.addEventListener("click", function(){
-  signupContainer.classList.add("shown");
-  signupContainer.classList.remove("hidden");
-  signupBackground.classList.remove("hidden");
-});
-close?.addEventListener("click", function(){
-  signupContainer.classList.add("hidden");
-  signupContainer.classList.remove("shown");
-  signupBackground.classList.add("hidden");
-});
-
 /*Chech if User Loged*/
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    console.log("Usuario logueado", user.displayName);
-    //window.open("./html/home.html", "_self");
+    console.log("User logged");
     const uid = user.uid;
     // ...
   } else {
-    console.log("No hay ningún usuario logueado");
+    console.log("User not logged");
   }
 });
 
 /*Logout*/
-
-// function logoutAccount() {
-//   signOut(auth).then(() => {
-//     alert("Sign out succesfully");
-//   }).catch((error) => {
-//     console.error(error);
-//   });
-// }
+export function logoutAccount() {
+  signOut(auth).then(() => {
+    alert("Sign out successfully");
+  }).catch((error) => {
+    console.error(error);
+  });
+}
 
 
 /*Sign Up*/
-const btnSignup = document.querySelector("#signup");
-
-btnSignup?.addEventListener("click", (e) =>{
-  e.preventDefault();
-  const email = document.querySelector("#signup-email").value;
-  const password = document.querySelector("#password-user").value;
-  createUserWithEmailAndPassword(auth, email, password)
+export function signup (emailRegister, passwordRegister, username) {
+  createUserWithEmailAndPassword(auth, emailRegister, passwordRegister)
   .then((userCredential) => {
     // Signed in
     const user = userCredential.user;
-    console.log("Usuario creado");
+    user.displayName = username;
+    alert("User successfully created! We've sent you a verification email");
+    //
+    sendEmailVerification(auth.currentUser)
+      .then(() => {
+        // Email verification sent!
+        // ...
+      });
     // ...
   })
   .catch((error) => {
@@ -77,12 +60,12 @@ btnSignup?.addEventListener("click", (e) =>{
     console.error(errorMessage);
     // ..
   });
-});
+}
+
+
 
 /*Login with Google*/
-const loginGoogle = document.querySelector("#google-login");
-
-loginGoogle?.addEventListener("click", (e) => {
+export function loginGoogle() {
   const provider = new GoogleAuthProvider();
   signInWithRedirect(auth, provider);
   getRedirectResult(auth)
@@ -90,7 +73,7 @@ loginGoogle?.addEventListener("click", (e) => {
     // This gives you a Google Access Token. You can use it to access Google APIs.
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential.accessToken;
-
+    window.open("../html/home.html", "_self");
     // The signed-in user info.
     const user = result.user;
   }).catch((error) => {
@@ -103,32 +86,27 @@ loginGoogle?.addEventListener("click", (e) => {
     const credential = GoogleAuthProvider.credentialFromError(error);
     // ...
   });
-});
+}
 
 /*Login Email*/
-const btnLogin = document.querySelector("#btnlogin");
-btnLogin?.addEventListener("click", (e) => {
-  e.preventDefault();
-  const email = document.querySelector("#email").value;
-  const password = document.querySelector("#password").value;
-  
-  signInWithEmailAndPassword(auth, email, password)
+export function loginEmail(emailLogin, passwordLogin){
+  signInWithEmailAndPassword(auth, emailLogin, passwordLogin)
   .then((userCredential) => {
     // Signed in
     const user = userCredential.user;
-    console.log("Login Exitoso");
+    window.open("../html/home.html", "_self");
     // ...
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    console.error(errorMessage);
+    console.error(error);
   });
-});
+}
+
 
 /*Login Twitter*/ 
-const loginTwitter = document.querySelector("#twitter-login");
-loginTwitter?.addEventListener("click", (e) =>{
+export function loginTwitter() {
   const provider = new TwitterAuthProvider();
   signInWithRedirect(auth, provider);
   getRedirectResult(auth)
@@ -139,7 +117,7 @@ loginTwitter?.addEventListener("click", (e) =>{
     const token = credential.accessToken;
     const secret = credential.secret;
     // ...
-
+    window.open("../html/home.html", "_self");
     // The signed-in user info.
     const user = result.user;
   }).catch((error) => {
@@ -153,5 +131,4 @@ loginTwitter?.addEventListener("click", (e) =>{
     console.log(email);
     // ...
   });
-});
-
+}
