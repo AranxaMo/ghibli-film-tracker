@@ -135,10 +135,14 @@ hr{
         height: 25vh;
     }
     /*card*/
+    body{
+        height: 100vh;
+    }
     .card{
         width: 80%;
         border-radius: 3rem;
         padding: 2rem 3rem;
+        margin: 4rem auto;
     }
     .info-container p{
         text-align: center;

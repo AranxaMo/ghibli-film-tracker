@@ -43,7 +43,7 @@ body{
     background-color: #FFFEFB;
 }
 .navbar{
-    height: 6rem;
+    height: 7rem;
     width: 100%;
     display: flex;
     align-items: center;
@@ -69,7 +69,8 @@ body{
     width: 90%;
     display: flex;
     flex-direction: column;
-    margin: 3rem auto;
+    align-items: center;
+    margin: 2rem auto;
 }
 .profile-img{
     width: 25rem;
@@ -82,15 +83,17 @@ body{
     border-radius: 50%;
 }
 .profile-info{
-    margin-top: 2rem;
     text-align: center;
     height: 13rem;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
+.username{
+    color: var(--blue);
+}
 .progress-user{
-    margin-top: 2.5rem;
+    margin-top: 1rem;
     display: flex   ;
     flex-direction: column;
     align-items: center;
@@ -112,6 +115,23 @@ body{
 .progress-number{
     margin-top: 1rem;
 }
+.quote-container{
+    width: 90%;
+    margin: 2rem auto;
+    text-align: center;
+}
+.quote__paragraph{
+    font-style: italic;
+    text-align: justify;
+}
+.quote__name{
+    text-align: right;
+    margin-top: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
 /*footer*/
 .footer{
     padding: 1rem 0;
@@ -129,6 +149,13 @@ body{
 
 @media screen and (min-width: 768px){
     .progress-container{
-        width: 60%;
+        width: 55%;
+    }
+    .quote-container{
+        width: 50%;
+    }
+    .quote__paragraph{
+        font-style: italic;
+        text-align: center;
     }
 }
