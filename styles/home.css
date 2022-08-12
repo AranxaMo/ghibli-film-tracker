@@ -1,10 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 :root{
-    --pink: #FBA89D;
     --lightColor: #FCFAF9;
+    --lightcream: #FFF9EB;
     --darkColor: #2C2726;
-    --cream: #ede4d3;
-    --lightCream: #fff6e5;
     --green: #b2caa9;
     --blue: #339eb8;
     --yellow: #eac562;
@@ -59,7 +57,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--blue);
+    background-color: var(--green);
 }
 .navbar-content{
     background-color: red;
@@ -279,10 +277,14 @@ input[type=checkbox]:checked + label:before{
 .footer{
     padding: 1rem 0;
     text-align: center;
-    background-color: var(--blue);
+    background-color: var(--green);
     color: var(--lightColor);
 }
 .github-link{
     color: var(--lightColor);
 }
 
+
+/*MEDIA QUERIES*/
+@media screen and (min-width: 768px){}
+@media screen and (min-width: 1024px){}

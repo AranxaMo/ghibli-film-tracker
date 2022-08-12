@@ -2,8 +2,9 @@
 :root{
     --lightColor: #FCFAF9;
     --darkColor: #4E4222;
+    --green: #b2caa9;
     --blue: #339eb8;
-    --yellow: #eac562;
+    --yellow: #D3B25C;
 }
 html {
     box-sizing: border-box;
@@ -38,7 +39,7 @@ body{
 }
 .logo-container{
     width: 80%;
-    height: 30vh;
+    height: 26vh;
     margin: auto;
 }
 .ghibli-logo{
@@ -48,16 +49,16 @@ body{
 }
 
 /*main*/
-.main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.banner-container{
+    display: none;
+}
+.card-container{
+    width: 85%;
+    margin: auto;
 }
 .login-container, .login-socials{
-    width: 85%;
+    width: 90%;
     margin: 2rem auto;
-    padding: 1rem;
-    border-radius: 0.5rem;
     font-size: 1.6rem;
 }
 .input-field{
@@ -106,6 +107,7 @@ body{
 /*Login Socials*/
 hr{
     width: 90%;
+    margin: auto;
     border: 0.5px solid var(--lightColor);
 }
 .btn{
@@ -120,3 +122,46 @@ hr{
     background-color: #3b5998;
     color: var(--lightColor);
 }
+
+/*MEDIA QUERIES*/
+@media screen and (min-width: 768px){
+    /*header*/
+    .logo-container{
+        height: 20%;
+    }
+    /*main*/
+    .main{
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+    }
+    .banner-container{
+        display: block;
+        height: 100vh;
+        width: 100%;
+    }
+    .side-banner{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .card-container{
+        width: 100%;
+        height: 100vh;
+        padding: 1rem;
+    }
+    .login-container, .login-socials{
+        width: 75%;
+        margin: auto;
+    }
+    /*Login Socials*/
+    hr{
+        width: 65%;
+    }
+    .login-socials{
+        text-align: center;
+    }
+    .btn{
+        width: 100%;
+    }
+}
+
