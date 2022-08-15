@@ -8,6 +8,7 @@ btnGoogle.addEventListener("click", (e) =>{
     e.preventDefault();
     loginGoogle();
 })
+
 /*login email*/
 btnLogin.addEventListener("click", (e) =>{
     e.preventDefault();

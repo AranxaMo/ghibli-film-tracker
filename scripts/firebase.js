@@ -3,7 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithRedirect, signOut, onAuthStateChanged, signInWithEmailAndPassword, TwitterAuthProvider, getRedirectResult, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
-import { } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-firestore.js"
+import { getFirestore, doc, setDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore.js"
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCjGZEnmf9xKAv0vK73NVwkz5CcULw9f1A",
@@ -17,13 +17,19 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+const db = getFirestore(app);
+let userId;
 
 /*Chech if User Loged*/
 onAuthStateChanged(auth, (user) => {
+  userId = user.uid;
   if (user) {
-    console.log("User logged");
+    console.log(`User logged ${user.displayName}`);
     const uid = user.uid;
     // ...
+    if (user && window.location == "http://127.0.0.1:5500/html/login.html") {
+      window.open("../html/home.html", "_self");
+    }
   } else {
     console.log("User not logged");
   }
@@ -74,7 +80,6 @@ export function loginGoogle() {
     // This gives you a Google Access Token. You can use it to access Google APIs.
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential.accessToken;
-    window.open("../html/home.html", "_self");
     // The signed-in user info.
     const user = result.user;
   }).catch((error) => {
@@ -95,7 +100,6 @@ export function loginEmail(emailLogin, passwordLogin){
   .then((userCredential) => {
     // Signed in
     const user = userCredential.user;
-    window.open("../html/home.html", "_self");
     // ...
   })
   .catch((error) => {
@@ -118,7 +122,6 @@ export function loginTwitter() {
     const token = credential.accessToken;
     const secret = credential.secret;
     // ...
-    window.open("../html/home.html", "_self");
     // The signed-in user info.
     const user = result.user;
   }).catch((error) => {
@@ -133,3 +136,30 @@ export function loginTwitter() {
     // ...
   });
 }
+
+/*FIREBASE*/
+export async function saveMovie(title, watch, rate) {
+  await setDoc(doc(db, userId, title), {
+    film: title,
+    watched: watch,
+    rating: rate
+  });
+}
+
+export async function deleteMovie(title) {
+  await deleteDoc(doc(db, userId, title));
+}
+
+export async function updateMovie(title, rate){
+  await updateDoc(title, {
+    rating: rate
+  });
+}
+
+// export function getData(){
+//   const unsub = onSnapshot(doc(db, "movies"), (doc) => {
+//     console.log("Current data: ", doc.data());
+//   });
+//   console.log(unsub);
+// }
+
