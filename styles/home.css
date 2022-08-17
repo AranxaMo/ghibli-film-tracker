@@ -57,7 +57,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgba(178, 202, 169, 0.5);
+    background-color: var(--green);
 }
 .navbar-content{
     background-color: red;
@@ -134,24 +134,25 @@ body{
     transform: translateX(-3rem);
 }
 .search-results{
+    position: absolute;
     z-index: 20;
-    background-color: rgba(178, 202, 169, 0.5);
+    background-color: rgba(178, 202, 169, 0.9);
     width: 100%;
     max-height: 21rem;
     top: 5rem;
     left: 0;
-    position: absolute;
     overflow-y: auto;
     scrollbar-width: 1rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 .search-results::-webkit-scrollbar{
     background-color: transparent;
     width: 1rem;
 }
 .search-results::-webkit-scrollbar-thumb{
-    background-color: var(--green);
+    background-color: var(--lightColor);
 }
 
 .result-item{
@@ -170,13 +171,13 @@ body{
     position: absolute;
     left: 0;
     top: 7rem;
-    background-color: rgba(178, 202, 169, 0.5);
+    background-color: rgba(178, 202, 169, 0.9);
     width: 100%;
     height: 15rem;
     padding: 2rem;
     font-size: 1.5rem;
     font-family: 'Montserrat', sans-serif;
-    color: var(--lightCream);
+    color: var(--lightColor);
     font-weight: 500;
     display: none;
     z-index: 10;
@@ -188,6 +189,7 @@ body{
     display: flex;
     flex-direction: column;
     padding: 0 3rem;
+    margin-bottom: 1rem;
 }
 select{
     font-size: 1.6rem;
@@ -318,10 +320,83 @@ input[type=checkbox]:checked + label:before{
         top: 1rem;
         right: 1rem;
     }
+    .navbar{
+        padding: 0 4rem;
+    }
+    .navbar-content{
+        background-color: red;
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100vh;
+        z-index: 10;
+        top: 7rem;
+        display: none;
+    }
+    .navbar-content.shown{
+        display: block;
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /*searchbar*/
+    .search-bar.open{
+        width: 100%;
+        transform: translateX(0rem);
+    }
+    .result-item{
+        padding: 1.3rem 6rem;
+    }
 }
+
 @media screen and (min-width: 1024px){
     /*Main*/
     .movies-section{
         grid-template-columns: 1fr 1fr 1fr;
+    }
+    /*searchbar*/
+    .input-box{
+        width: 50%;
+    }
+    .nav-search{
+        width: 95%;
+    }
+    .search-bar{
+        max-width: 100%;
+        width: 90%;
+        border: none;
+        padding: 1rem;
+        border-bottom: 1px solid var(--lightColor);
+    }
+    .search-icon{
+        display: none;
+    }
+    .result-item{
+        padding: 1.3rem 10rem;
+    }
+    .close-icon{
+        right: 2rem;
+        display: block;
+    }
+    .close-icon.shown{
+        display: block;
+    }
+
+    /*filters*/
+    .filter-icon{
+        display: none;
+    }
+    .filters-options{
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 7rem;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+    }
+    .filters-order, .filters-sort{
+        margin-bottom: 0rem;
     }
 }

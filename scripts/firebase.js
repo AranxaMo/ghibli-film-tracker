@@ -3,7 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithRedirect, signOut, onAuthStateChanged, signInWithEmailAndPassword, TwitterAuthProvider, getRedirectResult, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
-import { getFirestore, doc, setDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore.js"
+import { getFirestore, collection, doc, setDoc, deleteDoc, updateDoc, onSnapshot, getDoc } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore.js"
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCjGZEnmf9xKAv0vK73NVwkz5CcULw9f1A",
@@ -22,8 +22,8 @@ let userId;
 
 /*Chech if User Loged*/
 onAuthStateChanged(auth, (user) => {
-  userId = user.uid;
   if (user) {
+    userId = user.uid;
     console.log(`User logged ${user.displayName}`);
     const uid = user.uid;
     // ...
@@ -150,16 +150,18 @@ export async function deleteMovie(title) {
   await deleteDoc(doc(db, userId, title));
 }
 
-export async function updateMovie(title, rate){
-  await updateDoc(title, {
+export async function updateMovieRating(title, rate){
+  await updateDoc(doc(db, userId, title), {
     rating: rate
-  });
+  })
 }
 
-// export function getData(){
-//   const unsub = onSnapshot(doc(db, "movies"), (doc) => {
-//     console.log("Current data: ", doc.data());
-//   });
-//   console.log(unsub);
-// }
+export async function updateMovieStatus(title, watch){
+  await updateDoc(doc(db, userId, title), {
+    watched: watch
+  })
+}
 
+export async function getMovie(title) {
+  await onSnapshot(doc(db, userId, title));
+}

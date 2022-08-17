@@ -1,5 +1,5 @@
+import { saveMovie, updateMovieStatus } from "./firebase.js";
 const urlGhibli = 'https://ghibliapi.herokuapp.com/films';
-const menu = document.querySelector(".navbar-content");
 const searchbar = document.querySelector(".search-bar");
 const searchIcon = document.querySelector(".search-icon");
 const closeIcon = document.querySelector(".close-icon");
@@ -56,12 +56,27 @@ function createMovie(movie) {
                     <p>Score: ${movie.rt_score}</p>
                 </div>
                 <a href="./details.html?movieId=${movie.id}" class="movie-link__info"></a>
-                <input type="checkbox" class="movie-checkbox" id="${movie.id}">
+                <input type="checkbox" class="movie-checkbox" name="${movie.title}" id="${movie.id}">
                 <label for="${movie.id}" class="fa-solid fa-circle-check"></label>
             </div>
         </div>
     `; 
+
+    document.querySelectorAll("input[type=checkbox]").forEach((checkbox) =>{ 
+        checkbox.addEventListener("change", (e) => {
+            const id = checkbox.id;
+            const moviechek = document.getElementById(id);
+            if (moviechek.checked) {
+                saveMovie(moviechek.name, "Pending", "Pending");
+            }else{
+                updateMovieStatus(moviechek.name, false);
+            }
+            
+        })
+    })
 }
+
+
 
 function search(data){
     searchbar.addEventListener("keyup", (e) => {
@@ -85,8 +100,6 @@ function search(data){
 
 const orderOptions = document.getElementById("order");
 const sortOptions = document.getElementById("options");
-
-
 
 function dataMovie(data){
     let orderValue;
