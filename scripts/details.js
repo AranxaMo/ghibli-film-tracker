@@ -1,4 +1,5 @@
-import { saveMovie, deleteMovie, updateMovieRating, updateMovieStatus, getMovie} from "./firebase.js";
+import { saveMovie, updateMovieRating, updateMovieStatus} from "./firebase.js";
+
 const link = window.location.href;
 const newLink = new URL(link);
 const movieId = newLink.searchParams.get("movieId");
@@ -7,7 +8,6 @@ const watchedMovie = document.querySelector("#movie__watched");
 const starRate = document.getElementsByName("rate");
 let movieTitle;
 let ratingMovie = "Not rated yet";
-
 
 /*fetch*/
 function getMovies(url) {

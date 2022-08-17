@@ -368,15 +368,15 @@ input[type=checkbox]:checked + label:before{
         padding: 1rem;
         border-bottom: 1px solid var(--lightColor);
     }
+    .close-icon{
+        right: 2rem;
+        display: block;
+    }
     .search-icon{
         display: none;
     }
     .result-item{
         padding: 1.3rem 10rem;
-    }
-    .close-icon{
-        right: 2rem;
-        display: block;
     }
     .close-icon.shown{
         display: block;
