@@ -20,6 +20,7 @@ const auth = getAuth();
 const db = getFirestore(app);
 let userId;
 let username;
+
 /*Chech if User Loged*/
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -30,7 +31,7 @@ onAuthStateChanged(auth, (user) => {
     // ...
     if (user && window.location == "https://ghibli-tracker-aranxamo.netlify.app/html/login.html") {
       // http://127.0.0.1:5500/html/login.html
-      // window.open("../html/home.html", "_self");
+      //window.open("../html/home.html", "_self");
       window.open("https://ghibli-tracker-aranxamo.netlify.app/html/home.html", "_self");
     }
   } else {
@@ -163,4 +164,8 @@ export async function updateMovieStatus(title, watch){
   await updateDoc(doc(db, userId, title), {
     watched: watch
   })
+}
+
+export{
+  onSnapshot, doc, db, auth, onAuthStateChanged, collection
 }

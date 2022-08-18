@@ -1,4 +1,4 @@
-import { saveMovie, updateMovieStatus } from "./firebase.js";
+import { saveMovie, updateMovieStatus, onSnapshot, collection, db, auth, onAuthStateChanged } from "./firebase.js";
 const urlGhibli = 'https://ghibliapi.herokuapp.com/films';
 const searchbar = document.querySelector(".search-bar");
 const searchIcon = document.querySelector(".search-icon");
@@ -66,17 +66,22 @@ function createMovie(movie) {
         checkbox.addEventListener("change", (e) => {
             const id = checkbox.id;
             const moviechek = document.getElementById(id);
-            if (moviechek.checked) {
-                saveMovie(moviechek.name, "Pending", "Pending");
-            }else{
-                updateMovieStatus(moviechek.name, false);
-            }
-            
+            moviechek.checked == true ? saveMovie(moviechek.name, true, "Pending"): updateMovieStatus(moviechek.name, false); 
         })
     })
 }
-
-
+/*Movie watched*/
+// onAuthStateChanged(auth, async (user) => {
+//     if (user) {
+//         const uid = user.uid;
+//         const unsub =  await onSnapshot(collection(db, uid), (doc) => {
+//             doc.forEach((movie) =>{
+//                 const dataMovie =  movie.data();
+//                 console.log(dataMovie);
+//             })
+//         });
+//     } 
+// });
 
 function search(data){
     searchbar.addEventListener("keyup", (e) => {
@@ -147,5 +152,7 @@ function dataMovie(data){
         sortValue = sortOptions.value;
         filters(sortValue, orderValue);
     })
+
+
 }
 

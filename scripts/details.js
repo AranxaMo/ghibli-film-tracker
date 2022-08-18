@@ -1,4 +1,4 @@
-import { saveMovie, updateMovieRating, updateMovieStatus} from "./firebase.js";
+import { saveMovie, updateMovieRating, updateMovieStatus, onSnapshot, doc, db, auth, onAuthStateChanged } from "./firebase.js";
 
 const link = window.location.href;
 const newLink = new URL(link);
@@ -6,8 +6,40 @@ const movieId = newLink.searchParams.get("movieId");
 const urlGhibliFilm = `https://ghibliapi.herokuapp.com/films/${movieId}`; 
 const watchedMovie = document.querySelector("#movie__watched");
 const starRate = document.getElementsByName("rate");
+const oneStar = document.querySelector("#rate-1");
+const twoStars = document.querySelector("#rate-2");
+const threeStars = document.querySelector("#rate-3");
+const fourStars = document.querySelector("#rate-4");
+const fiveStars = document.querySelector("#rate-5");
 let movieTitle;
 let ratingMovie = "Not rated yet";
+
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        const uid = user.uid;
+        const unsub =  await onSnapshot(doc(db, uid, movieTitle), (doc) => {
+            const dataMovie =  doc.data();
+            dataMovie.watched == true ? watchedMovie.checked = true:watchedMovie.checked = false;
+            switch (dataMovie.rating){
+                case 'One Star':
+                    oneStar.checked = true;
+                    break;
+                case 'Two Stars':
+                    twoStars.checked = true;
+                    break;
+                case 'Three Stars':
+                    threeStars.checked = true;
+                    break;
+                case 'Four Stars':
+                    fourStars.checked = true;
+                    break;
+                case 'Five Stars':
+                    fiveStars.checked = true;
+                    break;
+            }
+        });
+    } 
+});
 
 /*fetch*/
 function getMovies(url) {
@@ -25,7 +57,7 @@ getMovies(urlGhibliFilm);
 /*store data*/
 watchedMovie.addEventListener("change", (e) => {
     if (watchedMovie.checked) {
-        saveMovie(movieTitle, true, "Pending");
+        saveMovie(movieTitle, true, ratingMovie);
     }else{
         updateMovieStatus(movieTitle, false);
     }
@@ -74,30 +106,30 @@ function createDisplay(movie) {
 }
 
 
-// function getYoutubeVideo(film){
-//     film == "Castle in the Sky" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/8ykEy-yPBFc"):
-//     film == "Grave of the Fireflies" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/4vPeTSRd580"):
-//     film == "My Neighbor Totoro" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/92a7Hj0ijLs"):
-//     film == "Kiki's Delivery Service" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/4bG17OYs-GA"):
-//     film == "Only Yesterday" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/OfkQlZArxw0"):
-//     film == "Porco Rosso" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/awEC-aLDzjs"):
-//     film == "Pom Poko" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/_7cowIHjCD4"):
-//     film == "Whisper of the Heart" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/0pVkiod6V0U"):
-//     film == "Princess Mononoke" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/4OiMOHRDs14"):
-//     film == "My Neighbors the Yamadas" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/1C9ujuCPlnY"):
-//     film == "Spirited Away" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/ByXuk9QqQkk"):
-//     film == "The Cat Returns" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/Gp-H_YOcYTM"):
-//     film == "Howl's Moving Castle" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/iwROgK94zcM"):
-//     film == "Tales from Earthsea" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/8hxYx3Jq3kI"):
-//     film == "Ponyo" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/CsR3KVgBzSM"):
-//     film == "Arrietty" ? (movielinkVideo = "https://www.youtube-nocookie.com.com/embed/9CtIXPhPo0g"):
-//     film == "From Up on Poppy Hill" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/9nzpk_Br6yo"):
-//     film == "The Wind Rises" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/YrueAaw0RYg"):
-//     film == "The Tale of the Princess Kaguya" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/W71mtorCZDw"):
-//     film == "When Marnie Was There" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/jjmrxqcQdYg"):
-//     film == "The Red Turtle" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/FRFAujm3rik"):
-//     film == "Earwig and the Witch" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/KRq3xlhZDPo"):
-//     "Error";
-//     const movieLink = document.querySelector(".video-movie");
-//     movieLink.src = movielinkVideo;
-// }
+function getYoutubeVideo(film){
+    film == "Castle in the Sky" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/8ykEy-yPBFc"):
+    film == "Grave of the Fireflies" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/4vPeTSRd580"):
+    film == "My Neighbor Totoro" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/92a7Hj0ijLs"):
+    film == "Kiki's Delivery Service" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/4bG17OYs-GA"):
+    film == "Only Yesterday" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/OfkQlZArxw0"):
+    film == "Porco Rosso" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/awEC-aLDzjs"):
+    film == "Pom Poko" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/_7cowIHjCD4"):
+    film == "Whisper of the Heart" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/0pVkiod6V0U"):
+    film == "Princess Mononoke" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/4OiMOHRDs14"):
+    film == "My Neighbors the Yamadas" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/1C9ujuCPlnY"):
+    film == "Spirited Away" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/ByXuk9QqQkk"):
+    film == "The Cat Returns" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/Gp-H_YOcYTM"):
+    film == "Howl's Moving Castle" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/iwROgK94zcM"):
+    film == "Tales from Earthsea" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/8hxYx3Jq3kI"):
+    film == "Ponyo" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/CsR3KVgBzSM"):
+    film == "Arrietty" ? (movielinkVideo = "https://www.youtube-nocookie.com.com/embed/9CtIXPhPo0g"):
+    film == "From Up on Poppy Hill" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/9nzpk_Br6yo"):
+    film == "The Wind Rises" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/YrueAaw0RYg"):
+    film == "The Tale of the Princess Kaguya" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/W71mtorCZDw"):
+    film == "When Marnie Was There" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/jjmrxqcQdYg"):
+    film == "The Red Turtle" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/FRFAujm3rik"):
+    film == "Earwig and the Witch" ? (movielinkVideo = "https://www.youtube-nocookie.com/embed/KRq3xlhZDPo"):
+    "Error";
+    const movieLink = document.querySelector(".video-movie");
+    movieLink.src = movielinkVideo;
+}
