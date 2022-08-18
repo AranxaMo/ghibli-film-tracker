@@ -12,6 +12,7 @@ const threeStars = document.querySelector("#rate-3");
 const fourStars = document.querySelector("#rate-4");
 const fiveStars = document.querySelector("#rate-5");
 let movieTitle;
+let movielinkVideo;
 let ratingMovie = "Not rated yet";
 
 onAuthStateChanged(auth, async (user) => {
@@ -102,7 +103,7 @@ function createDisplay(movie) {
 
     const moreInfoLink = document.querySelector(".movie-link");
     moreInfoLink.href = `https://ghibli.fandom.com/wiki/${movie.title}`;
-    //getYoutubeVideo(movie.title);  
+    getYoutubeVideo(movie.title);  
 }
 
 
